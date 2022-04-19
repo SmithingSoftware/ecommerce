@@ -1,0 +1,210 @@
+[
+  {
+    "id": "62313e0c100230fda7312971",
+    "name": "Serious Video Camera",
+    "description": "Might be a bit overkill for your TikTok videos, but it's a good way to get some extra attention.",
+    "price": "4000.99",
+    "available": false,
+    "image": "/images/equipment-camera-video-film.jpg",
+    "tags": [
+      "video",
+      "camera",
+      "film",
+      "media"
+    ]
+  },
+  {
+    "id": "62313e0c71df1ec0a0f39cbd",
+    "name": "Vintage Camera",
+    "description": "It takes film.",
+    "price": "300.06",
+    "available": false,
+    "image": "/images/camera-vintage-object.jpg",
+    "tags": [
+      "camera",
+      "film",
+      "vintage",
+      "media"
+    ]
+  },
+  {
+    "id": "62313e0cf0182f05d7a23d3b",
+    "name": "Mug",
+    "description": "Because you've kept a succulent plant alive for two months.",
+    "price": "18.99",
+    "available": false,
+    "image": "/images/cup-hands-female-beverage.jpg",
+    "tags": ["mug", "coffee", "cute", "gardening"]
+  },
+  {
+    "id": "62313e0cfddfdb4bd71198d3",
+    "name": "Microphone",
+    "description": "Just like at open-mic night, you can cry into this.",
+    "price": "81.00",
+    "available": true,
+    "image": "/images/microphone-music.jpg",
+    "tags": [
+      "microphone",
+      "media",
+      "music"
+    ]
+  },
+  {
+    "id": "62313e0c946025ee1d3b56e3",
+    "name": "Keyboard and mouse",
+    "description": "Peripherals never felt so good.",
+    "price": "200.00",
+    "available": true,
+    "image": "/images/magic-mouse-wooden-keyboard.jpg",
+    "tags": [
+      "keyboard",
+      "mouse",
+      "peripherals",
+      "media"
+    ]
+  },
+  {
+    "id": "62313e0c77233fb0a5ecffa5",
+    "name": "Red v neck shirt",
+    "description": "It's a shirt, but it's red and the collar is a little weird.",
+    "price": "42.00",
+    "available": true,
+    "image": "/images/beard-man-male.jpg",
+    "tags": [
+      "red",
+      "shirt",
+      "mens",
+      "vneck"
+    ]
+  },
+  {
+    "id": "62313e0c5bcfce8866f385cc",
+    "name": "Pocket Watch",
+    "description": "This'll look good inside of your tweed blazer.",
+    "price": "100.00",
+    "available": true,
+    "image": "/images/hold-hand-stopwatch.jpg",
+    "tags": ["hipster", "watch", "vintage"]
+  },
+  {
+    "id": "62313e0cac6a1b0be7aacec6",
+    "name": "Dainty Watch",
+    "description": "It's no rolex, but it'll do.",
+    "price": "220.00",
+    "available": false,
+    "image": "/images/watch-hand-gold.jpg",
+    "tags": [
+      "watch",
+      "womens",
+      "rosegold"
+    ]
+  },
+  {
+    "id": "62313e0ccb88b57537e5b5d0",
+    "name": "Red Flannel",
+    "description": "Standard issue Portland flannel",
+    "price": "49.00",
+    "available": true,
+    "image": "/images/woman-smiling-outdoors.jpg",
+    "tags": [
+      "womens",
+      "red",
+      "shirt",
+      "flannel",
+      "comfy"
+    ]
+  },
+  {
+    "id": "62313e0c2029927874446860",
+    "name": "Headphones",
+    "description": "Airpods are so 2021.",
+    "price": "384.66",
+    "available": false,
+    "image": "/images/headphones.jpg",
+    "tags": [
+      "headphones",
+      "media",
+      "music"
+    ]
+  },
+  {
+    "id": "62313e0cfa76f97000dd0d11",
+    "name": "Button Up Shirt",
+    "description": "This shirt is actually rad",
+    "price": "59.99",
+    "available": true,
+    "image": "/images/woman-phone-outdoors.jpg",
+    "tags": [
+      "blue",
+      "turquoise",
+      "shirt",
+      "womens"
+    ]
+  },
+  {
+    "id": "62313e0ccf31ebc11d99a3da",
+    "name": "Striped shirt",
+    "description": "Get the old school prisoner look.",
+    "price": "21.00",
+    "available": true,
+    "image": "/images/woman-grinning.jpg",
+    "tags": [
+      "shirt",
+      "stripe",
+      "womens"
+    ]
+  },
+  {
+    "id": "62313e0cb32df22a352a22ef",
+    "name": "Laptop",
+    "description": "Get a better laptop, it'll instantly make your business a success.",
+    "price": "2500.00",
+    "available": false,
+    "image": "/images/laptop-desk.jpg",
+    "tags": [
+      "laptop",
+      "computer",
+      "gaming",
+      "media"
+    ]
+  },
+  {
+    "id": "62313e0ccc0bcd86878e16ac",
+    "name": "Goose",
+    "description": "HONK",
+    "price": "99999.99",
+    "available": false,
+    "image": "/images/goose.jpg",
+    "tags": [
+      "goose",
+      "animal"
+    ]
+  },
+  {
+    "id": "62313e0c9eefdbfa7d95fd63",
+    "name": "anim",
+    "description": "sit adipisicing ullamco elit nulla",
+    "price": "221.57",
+    "available": true,
+    "image": "/images/backpack.jpg",
+    "tags": ["ut", "sit", "pariatur", "minim", "amet", "minim", "est"]
+  },
+  {
+    "id": "62313e0c7799c7fa3d3bc24b",
+    "name": "Lorem",
+    "description": "labore ea et culpa consectetur",
+    "price": "375.88",
+    "available": false,
+    "image": "/images/backpack.jpg",
+    "tags": ["minim", "non", "id", "nulla", "officia", "fugiat", "occaecat"]
+  },
+  {
+    "id": "62313e0c3e986959e7b578dd",
+    "name": "adipisicing",
+    "description": "enim consequat fugiat sunt laborum",
+    "price": "46.04",
+    "available": true,
+    "image": "/images/backpack.jpg",
+    "tags": ["veniam", "in", "in", "elit", "amet", "duis", "proident"]
+  }
+]
