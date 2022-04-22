@@ -7,3 +7,7 @@ SQLAlchemy-serializer==1.4.1
 flask-login==0.6.0
 redis==4.2.1
 cachelib==0.6.0
+
+
+# Background tasks
+celery==5.2.6

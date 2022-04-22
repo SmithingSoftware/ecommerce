@@ -3,6 +3,7 @@ from flask import Flask, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from cachelib.redis import RedisCache
+from celery import Celery
 
 import logging
 
@@ -11,6 +12,23 @@ db = SQLAlchemy()
 logging.basicConfig()
 logger = logging.Logger(__name__)
 logger.setLevel(logging.DEBUG)
+
+def make_celery(app):
+    celery = Celery(
+        app.import_name,
+        backend=app.config['CELERY_RESULT_BACKEND'],
+        broker=app.config['CELERY_BROKER_URL']
+    )
+    celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+    
+    celery.Task = ContextTask
+    app.celery = celery
+    return celery
 
 
 def init_cache(app):
@@ -25,6 +43,7 @@ def create_app():
 
     db.init_app(app)
     init_cache(app)
+    make_celery(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)

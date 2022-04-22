@@ -18,3 +18,7 @@ class Config:
     SQLALCHEMY_ECHO = True
     REDIS_HOST=os.environ.get("REDIS_HOST", "localhost")
     REDIS_PORT=os.environ.get("REDIS_PORT", 6379)
+
+    CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", "redis://localhost:6379")
+    CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", "redis://localhost:6379")
+
