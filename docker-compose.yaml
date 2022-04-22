@@ -58,6 +58,7 @@ services:
       - "3000:3000"
 
   api:
+    image: ecommerce_api
     build:
       context: ./ecommerce_api
       dockerfile: Dockerfile
@@ -80,3 +81,19 @@ services:
         condition: service_healthy
       postgres:
         condition: service_healthy
+
+  worker:
+    image: ecommerce_api
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=ecommerce
+      - POSTGRES_USER=postgres
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+      - REDIS_HOST=redis
+      - name=value
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: ["celery", "-A", "ecommerce.celery.celery", "worker"]

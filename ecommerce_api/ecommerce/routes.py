@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from ecommerce.models import Product, User
 from ecommerce.utils import get_cart, add_to_cart, set_cart
+from ecommerce.tasks import add
 from ecommerce import db, logger
 
 
@@ -139,6 +140,10 @@ def post_products() -> Response:
     ]
     return json.dumps({"products": created_products})
 
+@app.route("/task/test")
+def task() -> Response:
+    result = add.delay(1, 2)
+    return jsonify({"task_id": result.id})
 
 
 def _authenticate(email, password, remember=True):
