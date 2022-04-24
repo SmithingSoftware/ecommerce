@@ -42,6 +42,9 @@ Metrics are exported to Prometheus via the [Prometheus Flask Exporter](https://g
 
 Grafana is configured to use Prometheus as a datasource. To view metrics in Grafana, go to http://localhost:3001/ and use the default credentials (admin:admin)
 
+## Asynchronous Tasks
+We use [Celery](https://docs.celeryq.dev/en/stable/getting-started/introduction.html) for asynchronous tasks with the Redis as the broker.
+
 ## Local Development
 
 Start all components of the service with 
