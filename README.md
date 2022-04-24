@@ -3,18 +3,20 @@
 ```bash
 ✗ tree -d -L 2
 .
-├── data
+
+├── dockerdata
+│   ├── graphite
 │   ├── postgres
 │   ├── redis
 │   └── web
 ├── ecommerce_api
-│   ├── ecommerce
-│   └── __pycache__
+│   └── ecommerce
 ├── ecommerce_app
-│   ├── node_modules
 │   ├── public
 │   └── src
-└── nginx
+├── grafana
+├── nginx
+└── prometheus
 ```
 
 ## Frontend
