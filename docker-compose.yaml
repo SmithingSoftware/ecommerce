@@ -99,15 +99,19 @@ services:
         condition: service_healthy
     command: ["celery", "-A", "ecommerce.celery.celery", "worker"]
 
-  metrics:
-    image: graphiteapp/graphite-statsd
-    container_name: metrics 
+  prometheus:
+    image: prom/prometheus:latest
     ports:
-      - "2003:2003"
-      - "2004:2004"
-      - "8125:8125/udp"
-      - "8126:8126"
-      - "8001:80"
+      - "9090:9090"
     volumes:
-      - ./dockerdata/graphite:/opt/graphite/storage/whisper
-    
+      - "./prometheus/config.yml:/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - "./grafana/defaults.ini:/etc/grafana/grafana.ini"
+      - "./grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml"
+    ports:
+      - "3001:3000"
+    links:
+      - prometheus

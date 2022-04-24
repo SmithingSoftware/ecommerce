@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from cachelib.redis import RedisCache
 from celery import Celery
+from prometheus_flask_exporter import PrometheusMetrics
 
 import logging
 import statsd
@@ -32,12 +33,8 @@ def make_celery(app):
     return celery
 
 def init_metrics(app):
-    statsd_client = statsd.StatsClient(
-        host=app.config["STATSD_HOST"],
-        port=app.config["STATSD_PORT"],
-        prefix=app.config["STATSD_PREFIX"]
-    )
-    app.statsd_client = statsd_client
+    metrics = PrometheusMetrics(app)
+    app.metrics = metrics
     return app
 
 

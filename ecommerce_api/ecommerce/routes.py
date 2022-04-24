@@ -10,7 +10,9 @@ from ecommerce.utils import get_cart, add_to_cart, set_cart
 from ecommerce.tasks import add
 from ecommerce import db, logger
 
-statsd  = app.statsd_client
+metrics  = app.metrics
+# static information as metric
+metrics.info('app_info', 'Application info', version='1.0.3')
 
 
 @app.route("/health")
@@ -147,11 +149,10 @@ def task() -> Response:
     result = add.delay(1, 2)
     return jsonify({"task_id": result.id})
 
-
 @app.route("/stats/test")
-def submit_stats() -> Response:
-    statsd.incr("test.counter", 1)
-    return jsonify({"stats": "ok"})
+def stats_test() -> Response:
+    metrics.incr("test.count")
+    return "OK"
 
 
 def _authenticate(email, password, remember=True):

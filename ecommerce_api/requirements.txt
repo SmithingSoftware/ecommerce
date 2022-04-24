@@ -14,3 +14,4 @@ celery==5.2.6
 
 # metrics
 statsd==3.3.0
+prometheus-flask-exporter
