@@ -144,15 +144,11 @@ def post_products() -> Response:
     ]
     return json.dumps({"products": created_products})
 
+
 @app.route("/task/test")
 def task() -> Response:
     result = add.delay(1, 2)
     return jsonify({"task_id": result.id})
-
-@app.route("/stats/test")
-def stats_test() -> Response:
-    metrics.incr("test.count")
-    return "OK"
 
 
 def _authenticate(email, password, remember=True):
