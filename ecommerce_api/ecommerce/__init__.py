@@ -6,6 +6,7 @@ from cachelib.redis import RedisCache
 from celery import Celery
 
 import logging
+import statsd
 
 db = SQLAlchemy()
 
@@ -30,6 +31,15 @@ def make_celery(app):
     app.celery = celery
     return celery
 
+def init_metrics(app):
+    statsd_client = statsd.StatsClient(
+        host=app.config["STATSD_HOST"],
+        port=app.config["STATSD_PORT"],
+        prefix=app.config["STATSD_PREFIX"]
+    )
+    app.statsd_client = statsd_client
+    return app
+
 
 def init_cache(app):
     cache = RedisCache(host=app.config["REDIS_HOST"], port=app.config["REDIS_PORT"])
@@ -44,6 +54,7 @@ def create_app():
     db.init_app(app)
     init_cache(app)
     make_celery(app)
+    init_metrics(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)

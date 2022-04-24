@@ -21,3 +21,8 @@ class Config:
 
     CELERY_BROKER_URL = os.environ.get("CELERY_BROKER_URL", f'redis://{REDIS_HOST}:6379')
     CELERY_RESULT_BACKEND = os.environ.get("CELERY_RESULT_BACKEND", f'redis://{REDIS_HOST}:6379')
+
+    STATSD_HOST = os.environ.get("STATSD_HOST", "localhost")
+    STATSD_PORT = os.environ.get("STATSD_PORT", 8125)
+    STATSD_PREFIX = os.environ.get("STATSD_PREFIX", "ecommerce")
+

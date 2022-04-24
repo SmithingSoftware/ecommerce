@@ -72,6 +72,7 @@ services:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
       - REDIS_HOST=redis
+      - STATSD_HOST=metrics
     volumes:
       - ./ecommerce_api:/app
     expose:
@@ -92,8 +93,21 @@ services:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
       - REDIS_HOST=redis
-      - name=value
+      - STATSD_HOST=metrics
     depends_on:
       redis:
         condition: service_healthy
     command: ["celery", "-A", "ecommerce.celery.celery", "worker"]
+
+  metrics:
+    image: graphiteapp/graphite-statsd
+    container_name: metrics 
+    ports:
+      - "2003:2003"
+      - "2004:2004"
+      - "8125:8125/udp"
+      - "8126:8126"
+      - "8001:80"
+    volumes:
+      - ./dockerdata/graphite:/opt/graphite/storage/whisper
+    

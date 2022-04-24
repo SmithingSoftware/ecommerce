@@ -1,6 +1,6 @@
 import json
-from os import abort
-from flask import request, Response, redirect, url_for, make_response, jsonify
+
+from flask import abort, request, Response, redirect, url_for, make_response, jsonify
 from flask import current_app as app
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -9,6 +9,8 @@ from ecommerce.models import Product, User
 from ecommerce.utils import get_cart, add_to_cart, set_cart
 from ecommerce.tasks import add
 from ecommerce import db, logger
+
+statsd  = app.statsd_client
 
 
 @app.route("/health")
@@ -144,6 +146,12 @@ def post_products() -> Response:
 def task() -> Response:
     result = add.delay(1, 2)
     return jsonify({"task_id": result.id})
+
+
+@app.route("/stats/test")
+def submit_stats() -> Response:
+    statsd.incr("test.counter", 1)
+    return jsonify({"stats": "ok"})
 
 
 def _authenticate(email, password, remember=True):
