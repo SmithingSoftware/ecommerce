@@ -3,18 +3,20 @@
 ```bash
 ✗ tree -d -L 2
 .
-├── data
+
+├── dockerdata
+│   ├── graphite
 │   ├── postgres
 │   ├── redis
 │   └── web
 ├── ecommerce_api
-│   ├── ecommerce
-│   └── __pycache__
+│   └── ecommerce
 ├── ecommerce_app
-│   ├── node_modules
 │   ├── public
 │   └── src
-└── nginx
+├── grafana
+├── nginx
+└── prometheus
 ```
 
 ## Frontend
@@ -36,6 +38,14 @@ On the other hand, making a request to `http://localhost/api/products` proxies t
 
 ## Storage
 The ecommerce application uses Postgres 14 for relational data and Redis + `cachelib` as a key/value store.
+
+## Metrics
+Metrics are exported to Prometheus via the [Prometheus Flask Exporter](https://github.com/rycus86/prometheus_flask_exporter). Prometheus is reachable via the docker-compose network on http://prometheus:9090
+
+Grafana is configured to use Prometheus as a datasource. To view metrics in Grafana, go to http://localhost:3001/ and use the default credentials (admin:admin)
+
+## Asynchronous Tasks
+We use [Celery](https://docs.celeryq.dev/en/stable/getting-started/introduction.html) for asynchronous tasks with the Redis as the broker.
 
 ## Local Development
 

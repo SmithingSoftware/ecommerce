@@ -1,13 +1,18 @@
 import json
-from os import abort
-from flask import request, Response, redirect, url_for, make_response, jsonify
+
+from flask import abort, request, Response, redirect, url_for, make_response, jsonify
 from flask import current_app as app
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from ecommerce.models import Product, User
 from ecommerce.utils import get_cart, add_to_cart, set_cart
+from ecommerce.tasks import add
 from ecommerce import db, logger
+
+metrics  = app.metrics
+# static information as metric
+metrics.info('app_info', 'Application info', version='1.0.3')
 
 
 @app.route("/health")
@@ -139,6 +144,11 @@ def post_products() -> Response:
     ]
     return json.dumps({"products": created_products})
 
+
+@app.route("/task/test")
+def task() -> Response:
+    result = add.delay(1, 2)
+    return jsonify({"task_id": result.id})
 
 
 def _authenticate(email, password, remember=True):
