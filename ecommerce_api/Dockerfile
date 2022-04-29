@@ -7,6 +7,7 @@ RUN pip install -r requirements.txt
 FROM py_deps as api
 
 COPY ecommerce/ /ecommerce/
+COPY migrations/ /migrations/
 COPY config.py /config.py
 COPY wsgi.py /wsgi.py
 

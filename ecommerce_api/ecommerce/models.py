@@ -36,3 +36,4 @@ class User(UserMixin, db.Model, Serialized):
     name = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
+    is_admin = db.Column(db.Boolean, default=False)
