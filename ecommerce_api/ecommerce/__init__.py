@@ -1,6 +1,7 @@
 from distutils.command.config import config
 from flask import Flask, Response
 from flask_admin import Admin
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from cachelib.redis import RedisCache
@@ -52,6 +53,7 @@ def create_app():
     app.config.from_object("config.Config")
 
     db.init_app(app)
+
     init_cache(app)
     make_celery(app)
     init_metrics(app)
@@ -60,6 +62,7 @@ def create_app():
     login_manager.init_app(app)
 
     from ecommerce.models import User, Product
+    migrate = Migrate(app, db)
     init_admin(app, db, [User, Product])
 
     @login_manager.user_loader
