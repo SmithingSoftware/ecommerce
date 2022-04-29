@@ -1,12 +1,13 @@
 from distutils.command.config import config
 from flask import Flask, Response
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from cachelib.redis import RedisCache
 from celery import Celery
 from prometheus_flask_exporter import PrometheusMetrics
+
+from ecommerce.admin import init_admin
 
 import logging
 import statsd
@@ -45,11 +46,6 @@ def init_cache(app):
     app.cache = cache
     return app
 
-def init_admin(app, db, models):
-    admin = Admin(app, name="Ecommerce", template_mode="bootstrap3")
-    for model in models:
-        admin.add_view(ModelView(model, db.session))
-    return admin
 
 def create_app():
     app = Flask(__name__)
