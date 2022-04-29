@@ -5,7 +5,7 @@ from flask_login import current_user
 
 class GatedAdminView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated and current_user.is_admin
+      return current_user.is_authenticated and current_user.is_admin
 
 
 def init_admin(app, db, models):
