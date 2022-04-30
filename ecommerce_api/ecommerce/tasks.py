@@ -5,5 +5,5 @@ task = app.celery.task
 
 @task
 def add(x, y):
-  print("Adding {} and {}".format(x, y))
-  return x + y
+    print("Adding {} and {}".format(x, y))
+    return x + y
