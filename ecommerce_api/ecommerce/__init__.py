@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
@@ -55,7 +56,7 @@ def init_migrate(app):
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object("config.Config")
+    app.config.from_object(os.getenv("FLASK_CONFIG"))
 
     db.init_app(app)
 

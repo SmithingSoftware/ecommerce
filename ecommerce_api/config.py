@@ -30,3 +30,9 @@ class Config:
     STATSD_HOST = os.environ.get("STATSD_HOST", "localhost")
     STATSD_PORT = os.environ.get("STATSD_PORT", 8125)
     STATSD_PREFIX = os.environ.get("STATSD_PREFIX", "ecommerce")
+
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(
+        os.path.dirname(__file__), 'test.db'
+    )
