@@ -64,7 +64,7 @@ class Product(db.Model, Serialized):
         "price",
     )
 
-    id = db.Column(GUID(), primary_key=True, default=uuid.uuid4)
+    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = db.Column(db.String(80), unique=True, nullable=False)
     description = db.Column(db.String(255), nullable=True)
     image = db.Column(db.String(255), nullable=True)
@@ -74,7 +74,7 @@ class Product(db.Model, Serialized):
 class User(UserMixin, db.Model, Serialized):
     serialize_only = ("id", "name", "email")
 
-    id = db.Column(GUID(), primary_key=True, default=uuid.uuid4)
+    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
