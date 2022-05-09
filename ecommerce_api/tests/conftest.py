@@ -1,10 +1,9 @@
 import os
-
+import uuid
 import pytest
 import sqlite3
-import sqlalchemy
 from ecommerce import create_app
-
+from ecommerce.models import User
 
 
 def pytest_generate_tests(metafunc):
@@ -26,3 +25,11 @@ def session():
     connection.commit()
     yield db_session # 5
     connection.close()
+
+@pytest.fixture
+def user():
+    return User(email="test@test.com", password="test", id=uuid.uuid4())
+
+@pytest.fixture
+def admin_user():
+    return User(email="admin@test.com", password="test", is_admin=True, id=uuid.uuid4())
