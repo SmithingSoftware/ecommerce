@@ -10,9 +10,9 @@ from ecommerce.utils import get_cart, add_to_cart, set_cart
 from ecommerce.tasks import add
 from ecommerce import db, logger
 
-metrics  = app.metrics
+metrics = app.metrics
 # static information as metric
-metrics.info('app_info', 'Application info', version='1.0.3')
+metrics.info("app_info", "Application info", version="1.0.3")
 
 
 @app.route("/health")
@@ -55,13 +55,14 @@ def login_post() -> Response:
     app.logger.info(f"Login success: {email}")
     return make_response(jsonify({"user": user.to_dict()}), 200)
 
+
 @app.route("/user")
 @login_required
 def user() -> Response:
     return jsonify({"user": current_user.to_dict()})
 
 
-@app.route("/logout", methods=['POST'])
+@app.route("/logout", methods=["POST"])
 @login_required
 def logout() -> Response:
     logout_user()
@@ -107,7 +108,7 @@ def cart_bulk() -> Response:
 
 @app.route("/cart", methods=["POST"])
 @login_required
-def add_to_cart() -> Response:
+def add_to_cart_route() -> Response:
     data = request.json
     item_id = data.get("item_id")
     quantity = data.get("quantity", 1)
@@ -157,4 +158,3 @@ def _authenticate(email, password, remember=True):
         return None
     login_user(user, remember=remember)
     return user
-
