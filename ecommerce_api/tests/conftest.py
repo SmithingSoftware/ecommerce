@@ -2,8 +2,10 @@ import os
 import uuid
 import pytest
 import sqlite3
+from flask_login import FlaskLoginClient
 from ecommerce import create_app
 from ecommerce.models import User
+
 
 
 def pytest_generate_tests(metafunc):
@@ -12,8 +14,15 @@ def pytest_generate_tests(metafunc):
 @pytest.fixture
 def app():
   application = create_app()
+  application.test_client_class = FlaskLoginClient
   with application.app_context():
     yield application
+
+
+@pytest.fixture()
+def client(app):
+    return app.test_client()
+
 
 @pytest.fixture # 1
 def session():

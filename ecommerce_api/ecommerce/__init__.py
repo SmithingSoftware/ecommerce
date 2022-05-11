@@ -4,6 +4,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from cachelib.redis import RedisCache
+from cachelib.simple import SimpleCache
 from celery import Celery
 from prometheus_flask_exporter import PrometheusMetrics
 
@@ -43,8 +44,11 @@ def init_metrics(app):
 
 
 def init_cache(app):
-    cache = RedisCache(host=app.config["REDIS_HOST"],
-                       port=app.config["REDIS_PORT"])
+    if app.config["CACHE_TYPE"] == "REDIS":
+        cache = RedisCache(host=app.config["REDIS_HOST"],
+                        port=app.config["REDIS_PORT"])
+    else:
+        cache = SimpleCache()
     app.cache = cache
     return app
 
@@ -70,7 +74,7 @@ def create_app():
     from ecommerce.models import User, Product
 
     init_migrate(app)
-    init_admin(app, db, [User, Product])
+    # init_admin(app, db, [User, Product])
 
     @login_manager.user_loader
     def load_user(user_id):

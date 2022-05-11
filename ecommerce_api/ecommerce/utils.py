@@ -16,7 +16,7 @@ def set_cart(user: User, cart: List[str]) -> None:
     app.cache.set(user_cart_key(user), cart)
 
 
-def add_to_cart(user: User, item_id: str, quantity: int) -> None:
+def add_to_cart(user: User, item_id: str, quantity: int = 1) -> None:
     cart = get_cart(user)
     cart.extend([item_id] * quantity)
     set_cart(user, cart)
