@@ -46,7 +46,7 @@ def init_metrics(app):
 def init_cache(app):
     if app.config["CACHE_TYPE"] == "REDIS":
         cache = RedisCache(host=app.config["REDIS_HOST"],
-                        port=app.config["REDIS_PORT"])
+                           port=app.config["REDIS_PORT"])
     else:
         cache = SimpleCache()
     app.cache = cache
@@ -74,12 +74,13 @@ def create_app():
     from ecommerce.models import User, Product
 
     init_migrate(app)
-    # init_admin(app, db, [User, Product])
+    init_admin(app, db, [User, Product])
 
     @login_manager.user_loader
     def load_user(user_id):
         return User.query.get((user_id))
 
     with app.app_context():
+        from ecommerce import routes
         db.create_all()
         return app
