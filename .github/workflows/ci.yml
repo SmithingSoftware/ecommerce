@@ -1,0 +1,25 @@
+name: Linting and Unit Tests
+on: [push]
+jobs:
+  lint-and-test-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Python bootstrap
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ecommerce_api/requirements.txt
+          pip install -r ecommerce_api/requirements-test.txt
+      
+      - name: Run tests with pytest
+        run: pytest ecommerce_api/
+        

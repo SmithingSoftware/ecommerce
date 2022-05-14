@@ -74,6 +74,7 @@ services:
       - REDIS_HOST=redis
       - STATSD_HOST=metrics
       - DEBUG_METRICS=1
+      - FLASK_CONFIG=config.Config
     volumes:
       - ./ecommerce_api:/app
     expose:
@@ -96,6 +97,7 @@ services:
       - REDIS_HOST=redis
       - STATSD_HOST=metrics
       - DEBUG_METRICS=1
+      - FLASK_CONFIG=config.Config
     depends_on:
       redis:
         condition: service_healthy
