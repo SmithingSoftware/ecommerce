@@ -18,6 +18,10 @@ logging.basicConfig()
 logger = logging.Logger(__name__)
 logger.setLevel(logging.DEBUG)
 
+def init_cli(app):
+    from ecommerce.cli import bp
+    app.register_blueprint(bp)
+
 
 def make_celery(app):
     celery = Celery(
@@ -63,6 +67,8 @@ def create_app():
     app.config.from_object(os.getenv("FLASK_CONFIG"))
 
     db.init_app(app)
+    app.db = db
+    init_cli(app)
 
     init_cache(app)
     make_celery(app)
