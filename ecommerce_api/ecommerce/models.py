@@ -70,6 +70,7 @@ class Product(db.Model, Serialized):
     image = db.Column(db.String(255), nullable=True)
     price = db.Column(db.Numeric, nullable=False)
     available = db.Column(db.Boolean, default=True)
+    tags = db.relationship("Tag")
 
 
 class User(UserMixin, db.Model, Serialized):
@@ -84,8 +85,5 @@ class User(UserMixin, db.Model, Serialized):
 
 class Tag(db.Model, Serialized):
     id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
-    name = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
     product_id = db.Column(GUID(), db.ForeignKey('product.id'))
-
-    
-    
