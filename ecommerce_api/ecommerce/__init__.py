@@ -1,8 +1,10 @@
+import os
 from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from cachelib.redis import RedisCache
+from cachelib.simple import SimpleCache
 from celery import Celery
 from prometheus_flask_exporter import PrometheusMetrics
 
@@ -42,8 +44,11 @@ def init_metrics(app):
 
 
 def init_cache(app):
-    cache = RedisCache(host=app.config["REDIS_HOST"],
-                       port=app.config["REDIS_PORT"])
+    if app.config["CACHE_TYPE"] == "REDIS":
+        cache = RedisCache(host=app.config["REDIS_HOST"],
+                           port=app.config["REDIS_PORT"])
+    else:
+        cache = SimpleCache()
     app.cache = cache
     return app
 
@@ -55,7 +60,7 @@ def init_migrate(app):
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object("config.Config")
+    app.config.from_object(os.getenv("FLASK_CONFIG"))
 
     db.init_app(app)
 
@@ -76,5 +81,6 @@ def create_app():
         return User.query.get((user_id))
 
     with app.app_context():
+        from ecommerce import routes
         db.create_all()
         return app

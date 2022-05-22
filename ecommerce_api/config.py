@@ -17,6 +17,7 @@ class Config:
         f"postgresql://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}/{POSTGRES_DATABASE}",
     )
     SQLALCHEMY_ECHO = True
+    CACHE_TYPE = "REDIS"
     REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
     REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
 
@@ -30,3 +31,10 @@ class Config:
     STATSD_HOST = os.environ.get("STATSD_HOST", "localhost")
     STATSD_PORT = os.environ.get("STATSD_PORT", 8125)
     STATSD_PREFIX = os.environ.get("STATSD_PREFIX", "ecommerce")
+
+class TestConfig(Config):
+    TESTING = True
+    CACHE_TYPE = "MEMORY"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(
+        os.path.dirname(__file__), 'test.db'
+    )
