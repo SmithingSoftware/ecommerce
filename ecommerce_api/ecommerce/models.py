@@ -69,6 +69,7 @@ class Product(db.Model, Serialized):
     description = db.Column(db.String(255), nullable=True)
     image = db.Column(db.String(255), nullable=True)
     price = db.Column(db.Numeric, nullable=False)
+    available = db.Column(db.Boolean, default=True)
 
 
 class User(UserMixin, db.Model, Serialized):
@@ -79,3 +80,12 @@ class User(UserMixin, db.Model, Serialized):
     email = db.Column(db.String(100), unique=True)
     password = db.Column(db.String(100))
     is_admin = db.Column(db.Boolean, default=False)
+
+
+class Tag(db.Model, Serialized):
+    id = db.Column(GUID(), primary_key=True, default=lambda: str(uuid.uuid4()))
+    name = db.Column(db.String(50), unique=True, nullable=False)
+    product_id = db.Column(GUID(), db.ForeignKey('product.id'))
+
+    
+    
