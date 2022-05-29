@@ -58,3 +58,25 @@ To bring the services up and rebuild, provide the `--build` argument to docker-c
 ```bash
 docker-compose up --build
 ```
+
+To generate a migration, make your model changes and run:
+```
+flask db migrate -m "<Migration message>"
+```
+
+To apply migrations, run:
+```
+flask db upgrade
+```
+
+To seed test data into the db, use `flask api cli`.
+Adding products from ecommerce_api/ecommerce/data/products.json:
+```
+flask api cli db seed-products
+```
+
+Creating users:
+```
+flask api cli db seed-users
+```
+
